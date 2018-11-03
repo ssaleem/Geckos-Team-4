@@ -23,9 +23,9 @@ A random daily quote featched from forismatic API.
 User can set a daily goal highlighting the main focus for the day.
 
 ## APIs and Libraries
--[Yahoo Weather](https://developer.yahoo.com/weather/)
--[weather-icons](https://erikflowers.github.io/weather-icons/)
--[forismatic](https://forismatic.com/en/api/)
--[particles.js](https://vincentgarreau.com/particles.js/)
+- [Yahoo Weather](https://developer.yahoo.com/weather/)
+- [weather-icons](https://erikflowers.github.io/weather-icons/)
+- [forismatic](https://forismatic.com/en/api/)
+- [particles.js](https://vincentgarreau.com/particles.js/)
 
 
