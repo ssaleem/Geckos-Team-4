@@ -7,16 +7,11 @@ let minutes = now.getMinutes();
 let hours = now.getHours();
 
   function convertTo12(hours) {
-    if (hours == 0 ) {
-        document.getElementById("timeGreetingText").innerHTML = " morning";
-        return 12;
-    }
-    
-    if (hours > 12) {        
-        document.getElementById("timeGreetingText").innerHTML = " evening";         
-        return (hours - 12);                            
+      if (hours > 12) {        
+          document.getElementById("timeGreetingText").innerHTML = " Evening";
+          return (hours - 12);
       } else {
-          document.getElementById("timeGreetingText").innerHTML = " morning";
+          document.getElementById("timeGreetingText").innerHTML = " Morning";
           return ("0" + hours.toString());
       }
   }
@@ -29,12 +24,12 @@ let hours = now.getHours();
           document.getElementById("digit1").innerHTML = convertTo12(hours);
           // console.log('length less than 2');        
       } else {
-          document.getElementById("digit1").innerHTML =  convertTo12(hours).toString();        
+          document.getElementById("digit1").innerHTML = "0" + convertTo12(hours).toString();        
           // console.log('length more than 1');
       }
       
       if (minutes.toString().length < 2) {
-          document.getElementById("digit2").innerHTML = "0" + minutes.toString();
+          document.getElementById("digit2").innerHTML =  + "0" + minutes.toString();
       } else {
           document.getElementById("digit2").innerHTML = minutes;
       }
