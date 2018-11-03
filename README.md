@@ -17,7 +17,7 @@ A search bar to perform Google searches.
 TODO list widget with the provision of adding and deleting tasks.
 
 ### Daily Quote
-A random daily quote featched from 
+A random daily quote featched from forismatic API.
 
 ### Daily Goal
 User can set a daily goal highlighting the main focus for the day.
