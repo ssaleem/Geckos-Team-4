@@ -7,10 +7,13 @@ import { renderFocus, loadFocus, renderDifferentFocus } from './focus';
 // import * as setTime from './clock';
 
 import { setTime } from './clock';
-import { randomizeQuote } from './quote';
-import { particlesFunction } from './particles';
+import { loadUsername, changeUsername } from './username';
+import { getQuote } from './quote';
+//import { particlesFunction } from './particles';
+import 'particles.js/particles';
+const particlesJS = window.particlesJS;
 // import { changeBackground } from './background';
-import { addListeners } from './background';
+//import { addListeners } from './background';
 
 document.onload = getLocation();  //weather widget
 //sara:comment out following line
@@ -32,9 +35,13 @@ searchInput.addEventListener("keypress",function(event) {
 });
 
 
-addListeners();
-randomizeQuote();
-// particlesFunction();
+// addListeners();
+// randomizeQuote();
+loadUsername();
+changeUsername();
+$(document).ready(function() {    
+  getQuote();
+});
 // changeBackground();
 
 /**----------------------------------------------------------- TODOS ------------------------------------------------------- **/
@@ -73,3 +80,108 @@ document.querySelector('#new-todo').addEventListener('keypress', function (e)
         renderDifferentFocus();
     }
 /**----------------------------------------------------------- /FOCUS ------------------------------------------------------- **/
+
+/**----------------------------------------------------------- PARTICLES JS ------------------------------------------------------- **/
+particlesJS('particles-js',{
+    "particles":{
+      "number":{
+        "value":80
+      },
+      "color":{
+        "value":"#00bee8"
+      },
+      "shape":{
+        "type":"circle",
+        "stroke":{
+          "width":1,
+          "color":"#ccc"
+        },
+        "image":{
+          "src":"http://www.iconsdb.com/icons/preview/white/contacts-xxl.png"
+        }
+      },
+      "opacity":{
+        "value":0.9,
+        "random":true,
+        "anim":{
+          "enable":false,
+          "speed":1
+        }
+      },
+      "size":{
+        "value": 2,
+        "random":false,
+        "anim":{
+          "enable": false,
+          "speed":40
+        }
+      },
+      "line_linked":{
+        "enable": true,
+        "distance": 120,
+        "color":"#fff",
+        "width":1
+      },
+      "move":{
+        "enable":true,
+        "speed":1,
+        "direction":"none",
+        "straight":false
+      }
+    },
+    "interactivity":{
+      "events":{
+        "onhover":{
+          "enable":false,
+          "mode":"repulse"
+        },
+        "onclick":{
+          "enable": false,
+          "mode":"push"
+        }
+      },
+      "modes":{
+        "repulse":{
+          "distance":50,
+          "duration":0.4
+        },
+        "bubble":{
+          "distance":100,
+          "size":10
+        }
+      }
+    }
+  }
+)
+/**----------------------------------------------------------- /PARTICLES JS ------------------------------------------------------- **/
+
+/**----------------------------------------------------------- TODO MODAL ------------------------------------------------------- **/
+document.querySelector('.todo_button').addEventListener('click', function()
+{
+  const todo_modal = document.querySelector('.todo_modal');
+  if (todo_modal.style.display === 'none')
+  {
+    todo_modal.style.display = 'grid';
+  }
+  else
+  {
+    todo_modal.style.display = 'none';
+  }
+});
+/**----------------------------------------------------------- /TODO MODAL ------------------------------------------------------- **/
+/**----------------------------------------------------------- /USERNAME JS ------------------------------------------------------- **/
+document.getElementById("usernameInput").addEventListener("keydown", function(e) {
+  //alert("enter key pressed");
+  let key = e.which || e.keyCode;
+  if (key == 13) {
+      // document.getElementById("username").innerText = document.getElementById("usernameInput").value;      
+      document.getElementById("usernameInput").style.visibility = "hidden";
+
+      let currentUsername = document.getElementById("usernameInput").value; 
+      localStorage.setItem("username", currentUsername);
+      let updatedUsername =  localStorage.getItem("username");
+      document.getElementById("username").innerText = updatedUsername;
+      document.getElementById("usernameInput").value = "";
+  }
+});
+/**----------------------------------------------------------- /USERNAME JS ------------------------------------------------------- **/
