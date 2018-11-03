@@ -1,5 +1,3 @@
-console.log(`weather module loaded`);
-
 const defaultCities = [`Miami, FL`, `New York, NY`, `Los Angeles, CA`, `Chicago, IL`, `Seattle, WA`];
 const daysOfWeek = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 const numberOfDays = 5;
