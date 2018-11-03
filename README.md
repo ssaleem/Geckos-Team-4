@@ -1,8 +1,8 @@
 # Raftaar-A Chrome Extension
-A personalized dash board chrome extension to optimize productivity. This project was built in collaboration with a [Chingu](https://chingu.io/) team.
+A personalized dash board chrome extension to optimize productivity and faciliate focus. This project was built in collaboration with a remote [Chingu](https://chingu.io/) team.
 
-## Screenshot
-![Extension Screenshot](./screenshot/rc-large.jpg?raw=true)
+## Extension Screenshot
+![Extension Screenshot](./screenshot/screenshot.png?raw=true)
 
 ## Features
 The extension has following features.
@@ -21,5 +21,11 @@ A random daily quote featched from forismatic API.
 
 ### Daily Goal
 User can set a daily goal highlighting the main focus for the day.
+
+## APIs and Libraries
+-[Yahoo Weather](https://developer.yahoo.com/weather/)
+-[weather-icons](https://erikflowers.github.io/weather-icons/)
+-[forismatic](https://forismatic.com/en/api/)
+-[particles.js](https://vincentgarreau.com/particles.js/)
 
 
