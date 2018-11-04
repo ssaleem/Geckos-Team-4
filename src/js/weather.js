@@ -153,6 +153,7 @@ tempUnit.addEventListener("click", function(event){
 for(let i = 0; i < numberOfDays; i++){
     let dayId = `day${i}`;
     let dayDiv = document.getElementById(dayId);
+    //Immediately Invoked Function Expression(IIFE) alongwith closure to bind index with dayDiv in event listener
     dayDiv.addEventListener("click",(function(index){
         return function(event){
             loc.innerHTML = `${response.query.results.channel.location.city} <span id="fullDayName">${getDayFromArray(forecastList[index]['day'])}</span>`;
@@ -166,11 +167,7 @@ for(let i = 0; i < numberOfDays; i++){
 
 // Helper functions
 function getDayFromArray(day){
-    for(let i = 0; i < daysOfWeek.length; i++){
-        if(daysOfWeek[i].startsWith(day)){
-            return daysOfWeek[i];
-        }
-    }
+    return daysOfWeek.filter((dayName) => dayName.startsWith(day));
 }
 
 const FtoC = (tempf) => ((tempf - 32)/1.8).toString().slice(0,2);
