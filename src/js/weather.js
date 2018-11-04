@@ -77,9 +77,13 @@ function processWeather(){
 
     let forecasts = response.query.results.channel.item.forecast;
     for(let day = 0; day < 5; day++){
-        forecastList.push([forecasts[day].day, forecasts[day].code,
-            {F: forecasts[day].high, C: FtoC(forecasts[day].high)},
-            {F: forecasts[day].low, C: FtoC(forecasts[day].low)}, forecasts[day].text]);
+        forecastList.push({
+            day: forecasts[day].day.toUpperCase(),
+            code: forecasts[day].code,
+            high: {F: forecasts[day].high, C: FtoC(forecasts[day].high)},
+            low: {F: forecasts[day].low, C: FtoC(forecasts[day].low)},
+            description: forecasts[day].text
+        });
     }
 
     fillForecastDays();
@@ -97,13 +101,14 @@ function getDayFromArray(day){
 const FtoC = (tempf) => ((tempf - 32)/1.8).toString().slice(0,2);
 
 function fillForecastDays(){
+    console.log(forecastList);
     for(let i = 0; i < numberOfDays; i++){
         let dayId = `day${i}`;
         let dayDiv = document.getElementById(dayId);
-        let dayName = forecastList[i][0].toUpperCase();
-        let dayIcon = forecastList[i][1];
-        let dayHigh = forecastList[i][2][tUnit];
-        let dayLow = forecastList[i][3][tUnit];
+        let dayName = forecastList[i]['day'];
+        let dayIcon = forecastList[i]['code'];
+        let dayHigh = forecastList[i]['high'][tUnit];
+        let dayLow = forecastList[i]['low'][tUnit];
 
         dayDiv.innerHTML = `${dayName}<div><span class="prominent"><i class="wi wi-yahoo-${dayIcon}"></i> ${dayHigh}°</span> ${dayLow}°</div>`;
     }
@@ -136,10 +141,7 @@ tempUnit.addEventListener("click", function(event){
         tUnit = "C";
         temperature.innerHTML = `${FtoC(currentWeather.temp)}°` ;
         fillForecastDays();
-        console.log(temp.innerHTML);
         temp.innerHTML = `${FtoC(currentWeather.temp)}°`;
-        console.log(temp.innerHTML);
-
     }
     else if(event.target.id == "tempF"){
         tempF.classList.add("prominent");
@@ -157,10 +159,10 @@ for(let i = 0; i < numberOfDays; i++){
     let dayDiv = document.getElementById(dayId);
     dayDiv.addEventListener("click",(function(index){
         return function(event){
-            loc.innerHTML = `${response.query.results.channel.location.city} <span id="fullDayName">${getDayFromArray(forecastList[index][0])}</span>`;
-            desc.innerHTML = forecastList[index][4];
-            wIcon.innerHTML = `<i class="wi wi-yahoo-${forecastList[index][1]}"></i>`;
-            temp.innerHTML = `<span>${forecastList[index][2][tUnit]}°<span id="templow"> ${forecastList[index][3][tUnit]}°</span></span>`;
+            loc.innerHTML = `${response.query.results.channel.location.city} <span id="fullDayName">${getDayFromArray(forecastList[index]['day'])}</span>`;
+            desc.innerHTML = forecastList[index]['description'];
+            wIcon.innerHTML = `<i class="wi wi-yahoo-${forecastList[index]['code']}"></i>`;
+            temp.innerHTML = `<span>${forecastList[index]['high'][tUnit]}°<span id="templow"> ${forecastList[index]['low'][tUnit]}°</span></span>`;
             event.stopPropagation();  //to avoid event propagation to weather popup
         };
     })(i));
