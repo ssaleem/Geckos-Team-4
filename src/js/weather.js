@@ -29,6 +29,7 @@ let response;
 let forecastList = [];
 let tUnit="F";
 
+// Get location from browser
 export function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getWeather, error);
@@ -43,6 +44,8 @@ function error(){
 
 }
 
+
+// Fetch weather from Yahoo API
 function getWeather(position, city=null) {
 
     let query;
@@ -67,7 +70,7 @@ function getWeather(position, city=null) {
     });
 }
 
-
+// Process Weather data
 function processWeather(){
 
     currentWeather = response.query.results.channel.item.condition;
@@ -90,16 +93,7 @@ function processWeather(){
 
 }
 
-function getDayFromArray(day){
-    for(let i = 0; i < daysOfWeek.length; i++){
-        if(daysOfWeek[i].startsWith(day)){
-            return daysOfWeek[i];
-        }
-    }
-}
-
-const FtoC = (tempf) => ((tempf - 32)/1.8).toString().slice(0,2);
-
+// Fill forecast data in DOM
 function fillForecastDays(){
     console.log(forecastList);
     for(let i = 0; i < numberOfDays; i++){
@@ -115,8 +109,9 @@ function fillForecastDays(){
 
 }
 
+// ================Event Listeners===================
+
 weather.addEventListener("click",function(event){
-    console.log("weather clicked");
     if(event.target.classList.contains("weatherPopup") == false){
         event.stopPropagation(); //to avoid event propagation to <body> element
         loc.innerHTML = response.query.results.channel.location.city;
@@ -129,6 +124,7 @@ weather.addEventListener("click",function(event){
 });
 
 body.addEventListener("click", function(event){
+    //close weather widget if user clicks anywhere on the page except the widget itself
     if(weatherPopup.classList.contains("show")){
         weatherPopup.classList.remove("show");
     }
@@ -167,3 +163,14 @@ for(let i = 0; i < numberOfDays; i++){
         };
     })(i));
 }
+
+// Helper functions
+function getDayFromArray(day){
+    for(let i = 0; i < daysOfWeek.length; i++){
+        if(daysOfWeek[i].startsWith(day)){
+            return daysOfWeek[i];
+        }
+    }
+}
+
+const FtoC = (tempf) => ((tempf - 32)/1.8).toString().slice(0,2);
